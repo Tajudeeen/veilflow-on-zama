@@ -1,5 +1,5 @@
-import type { Metadata } from "next";
-import "./page"
+﻿import type { Metadata } from "next";
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "VeilFlow",
@@ -13,3 +13,4 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     </html>
   );
 }
+

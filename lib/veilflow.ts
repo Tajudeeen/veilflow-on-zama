@@ -51,7 +51,7 @@ async function createFhevmInstance() {
     throw new Error("No injected wallet found. Install MetaMask or another Sepolia wallet.");
   }
 
-  const sdk = await import("@zama-fhe/relayer-sdk/bundle");
+  const sdk = await import("@zama-fhe/relayer-sdk/web");
   await sdk.initSDK();
   return sdk.createInstance({
     ...sdk.SepoliaConfig,
