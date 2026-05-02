@@ -1,4 +1,4 @@
-import "@fhevm/hardhat-plugin";
+﻿import "@fhevm/hardhat-plugin";
 import "@nomicfoundation/hardhat-ethers";
 import "@nomicfoundation/hardhat-toolbox";
 import "hardhat-deploy";
@@ -7,9 +7,14 @@ import type { HardhatUserConfig } from "hardhat/config";
 
 const privateKey = process.env.PRIVATE_KEY;
 const mnemonic = process.env.MNEMONIC ?? "test test test test test test test test test test test junk";
+
 const sepoliaRpc =
   process.env.SEPOLIA_RPC_URL ??
   (process.env.INFURA_API_KEY ? `https://sepolia.infura.io/v3/${process.env.INFURA_API_KEY}` : undefined);
+
+if (!sepoliaRpc) {
+  throw new Error("Missing SEPOLIA_RPC_URL. Add an Alchemy or Infura Sepolia RPC URL to your .env file.");
+}
 
 const accounts = privateKey ? [privateKey] : { mnemonic };
 
@@ -37,7 +42,7 @@ const config: HardhatUserConfig = {
       chainId: 31337
     },
     sepolia: {
-      url: sepoliaRpc ?? "https://eth-sepolia.public.blastapi.io",
+      url: sepoliaRpc,
       chainId: 11155111,
       accounts
     }
